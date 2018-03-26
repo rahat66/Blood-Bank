@@ -1,5 +1,21 @@
 <?php 
 include("Library/header.php");
+include_once('Classes/Donor.php');
+$donor = new Donor();
+$ap  = $donor -> donorByGroup('A+');
+$an  = $donor -> donorByGroup('A-');
+$bp  = $donor -> donorByGroup('B+');
+$bn  = $donor -> donorByGroup('B-');
+$op  = $donor -> donorByGroup('O+');
+$on  = $donor -> donorByGroup('O-');
+$abp = $donor -> donorByGroup('AB+');
+$abn = $donor -> donorByGroup('AB-');
+
+$nu = $donor -> newDonor();
+//echo '<pre>';
+//print_r($nu);
+//echo '</pre>';
+
 ?>
       
     <div class="container">
@@ -79,28 +95,28 @@ include("Library/header.php");
             <div class="panel-body">
                 <div class="row ">
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">A+<span class="badge">44</span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">A+<span class="badge"><?php echo $ap; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">A-<span class="badge">44</span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">A-<span class="badge"><?php echo $an; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">B+<span class="badge">44</span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">B+<span class="badge"><?php echo $bp; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">B-<span class="badge">44</span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">B-<span class="badge"><?php echo $bn; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">O+<span class="badge">44</span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">O+<span class="badge"><?php echo $op; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">O-<span class="badge">44</span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">O-<span class="badge"><?php echo $on; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">AB+<span class="badge">44</span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">AB+<span class="badge"><?php echo $abp; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">AB-<span class="badge">44</span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">AB-<span class="badge"><?php echo $abn; ?></span></a>
             </div>
                 </div>
             </div>  
@@ -124,8 +140,8 @@ include("Library/header.php");
                     <thead>
                         <th>Name</th>
                         <th>Blood Group</th>
-                        <th>Age</th>
-                        <th>Living District</th>
+                        <th>Department</th>
+                        <th>Batch</th>
                         <th>Contact No</th>
                         <th>Donor's Status</th>
                         <th>Email</th>
@@ -134,40 +150,30 @@ include("Library/header.php");
                     </thead>
                     
                     <tbody>
+                        <?php
+                        if(isset($nu)){
+                            while($value = $nu -> fetch_assoc()){
+                                
+                        ?>
                         <tr>
-                            <td>Tanzila Tania</td>
-                            <td>A positive(+)</td>
-                            <td>21 yrs</td>
-                            <td>Noakhali</td>
-                            <td>0123456789</td>
-                            <td>Active</td>
-                            <td><a href="#" class="btn  btn-info">Send Email</a></td>
-                            <td><a href="donorprofile.php" class="btn  btn-info">View Profile</a></td>
+                            <td><?php echo $value['donor_name']; ?></td>
+                            <td><?php echo $value['blood_group']; ?></td>
+                            <td><?php echo $value['dept_name']; ?></td>
+                            <td><?php echo $value['batch_tag']; ?></td>
+                            <td>0<?php echo $value['donor_contNo']; ?></td>
+                            <td><?php if($value['donor_status'] == 0) echo "Inactive"; else echo "Active"; ?></td>
+                            <td><?php echo $value['donor_email']; ?></td>
+                            <td><a href="donorprofile.php?d_id=<?php echo $value['donor_id']; ?>" class="btn  btn-info">View Profile</a></td>
                         </tr>
-                        
-                        <tr>
-                            <td>Tanzila Tania</td>
-                            <td>A positive(+)</td>
-                            <td>21 yrs</td>
-                            <td>Noakhali</td>
-                            <td>0123456789</td>
-                            <td>Active</td>
-                            <td><a href="#" class="btn  btn-info">Send Email</a></td>
-                            <td><a href="donorprofile.html" class="btn  btn-info">View Profile</a></td>
-                        </tr>
-                        
-                        <tr>
-                            <td>Tanzila Tania</td>
-                            <td>A positive(+)</td>
-                            <td>21 yrs</td>
-                            <td>Noakhali</td>
-                            <td>0123456789</td>
-                            <td>Active</td>
-                            <td><a href="#" class="btn  btn-info">Send Email</a></td>
-                            <td><a href="donorprofile.html" class="btn  btn-info">View Profile</a></td>
-                        </tr>
+                        <?php }}?>
             
                     </tbody>
+                    
+                    <tfoot>
+                        <tr>
+                           <td colspan="8"><a style="float:right;" class="btn">See All</a></td> 
+                        </tr>
+                    </tfoot>
 
                 </table>
               </div>
