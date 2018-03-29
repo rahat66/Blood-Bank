@@ -15,7 +15,12 @@ $nu = $donor -> newDonor();
 //echo '<pre>';
 //print_r($nu);
 //echo '</pre>';
-
+if($_SERVER['REQUEST_METHOD']=='POST'){
+    $ueml = $_POST['uemail'];
+    $upss = $_POST['upass'];
+    
+    $getLog = $donor -> donorLogin($ueml, $upss);
+}
 ?>
       
     <div class="container">
@@ -38,9 +43,19 @@ $nu = $donor -> newDonor();
                     <div class="panel-heading">
                       <h3 class="panel-title">Donors Area</h3>
                     </div>
+                    
                     <div class="panel-body">
-                        <input type="email" placeholder="Email" class="form-control input-sm" />
-                        <button class="btn btn-primary btn-sm" >Login</button>
+                        <?php
+                        if(isset($_SESSION['donorId'])){
+                            echo "<a href='donorprofile.php' class = 'btn btn-primary' >Go to Profile</a>";
+                        }else{
+                    ?>
+                        <form action="index.php" method="post">
+                            <input type="email" placeholder="Email" class="form-control input-sm" name="uemail" /><br/>
+                            <input type="password" placeholder="Password" class="form-control input-sm" name="upass" /><br/>
+                            <button class="btn btn-primary btn-sm" >Login</button>
+                        </form>
+                        <?php }?>
                     </div>  
                 </div>  
           </div>

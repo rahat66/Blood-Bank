@@ -1,6 +1,13 @@
  
 <?php
 include("Library/header.php");
+include_once('Classes/Donor.php');
+ $donor = new Donor();
+    if(isset($_GET['d_id'])){
+        $did = $_GET['d_id'];
+        echo $did;
+        $getD = $donor -> getDonorById($did);
+    }
 ?> 
     
     <div class="container  mgUpper ">
@@ -14,13 +21,25 @@ include("Library/header.php");
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-condensed">
+                            <?php
+                                    if(isset($_GET['action']) && $_GET['action'] == 'logout'){
+                                    session_destroy();
+                                    header('Location:index.php');
+                                        }  
+                                ?>
+                                
+                            <?php
+                                        if(isset($_SESSION['donorId'])){
+                            ?>
+                                            <table class="table table-bordered table-condensed">
                                 
                                 <thead>
-                                    <th><a href="#" class="btn btn-success">Logout</a></th>
+                                    <th><a href="? action=logout" class="btn btn-success">Logout</a></th>
                                 </thead>
                                 
                                 <tbody>
+                                    
+                                    
                                     <tr>
                                         <td><a href="#" class="text-info">View Profile</a></td>
                                     </tr>
@@ -51,6 +70,15 @@ include("Library/header.php");
                                 </tbody>
     
                             </table>
+                                 <?php }
+                            else{
+                            ?>
+                            <form action="index.php" method="post">
+                            <input type="email" placeholder="Email" class="form-control input-sm" name="uemail" /><br/>
+                            <input type="password" placeholder="Password" class="form-control input-sm" name="upass" /><br/>
+                            <button class="btn btn-primary btn-sm" >Login</button>
+                            </form>
+                            <?php }?>
                         </div>
                     </div>       
                 </div>
@@ -60,47 +88,53 @@ include("Library/header.php");
                 
                 <div class="panel panel-primary ">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Your Profile</h3>
+                        <h3 class="panel-title">Profile<span style="float:right;"><a class="btn-link" style="color:white;" href="index.php">back</a></span></h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             
                             <table class="table table-bordered table-striped">
                                 <tbody>
+                                    <?php
+                                    if(isset($getD)){
+                                        while($value = $getD -> fetch_assoc()){
+                                            
+
+                                    ?>
                                     <tr>
                                         <td>Photo</td>
-                                        <td><img class="img-responsive" style="width: 100px; height: 100px;" src="img/be-a-blood-donors.jpg" alt="profile" /></td>
+                                        <td><img class="img-responsive" style="width: 100px; height: 100px;" src="img/image-default.jpg" alt="profile" /></td>
                                     </tr>
                                     
                                      <tr>
                                         <td>Name</td>
-                                        <td>Tanzila Tania</td>
+                                        <td><?php echo $value['donor_name']; ?></td>
                                     </tr>
                                     
                                      <tr>
                                         <td>Blood Group</td>
-                                        <td>B positive(+)</td>
+                                        <td><?php echo $value['blood_group']; ?></td>
                                     </tr>
                                     
                                     <tr>
                                         <td>Member Status</td>
-                                        <td> ready for donate</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Gender</td>
-                                        <td>Female</td>
+                                        <td><?php if($value['donor_status'] == 0) echo "Inactive"; else echo "Active"; ?></td>
                                     </tr>
                                     
                                     <tr>
                                         <td>Contact No</td>
-                                        <td>12345678909</td>
+                                        <td>0<?php echo $value['donor_contNo']; ?></td>
                                     </tr>
                                     
                                     <tr>
-                                        <td>Living District</td>
-                                        <td>Noakhali</td>
+                                        <td>Department</td>
+                                        <td><?php echo $value['dept_name']; ?></td>
                                     </tr>
+                                    <tr>
+                                        <td>Batch</td>
+                                        <td><?php echo $value['batch_tag']; ?></td>
+                                    </tr>
+                                    <?php }}?>
                                 </tbody>
                                 
                             </table>
@@ -142,5 +176,5 @@ include("Library/header.php");
       
       
 <?php
-include("Libaray/footer.php");
+include("Library/footer.php");
 ?>
