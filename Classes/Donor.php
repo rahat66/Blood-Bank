@@ -46,5 +46,29 @@ class Donor{
         $this -> res = mysqli_query($this -> conn, $this -> sql);
         return $this -> res;
     }
+    
+    function allDonor(){
+        $this -> sql ="SELECT donor.donor_id, donor.donor_name, donor.donor_email, donor.donor_contNo, donor.donor_status, blood.blood_group, dept.dept_name, batch.batch_tag FROM donor,dept,batch,blood WHERE donor.blood_id=blood.blood_id AND donor.dept_id=dept.dept_id AND donor.batch_id=batch.batch_id ORDER BY donor.donor_id DESC;";
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+        return $this -> res;
+    }
+    
+    function getDonorByIndex($sgp, $sdep, $sst){
+        
+        if($sgp !='All' and $sdep =='All'){
+           $this -> sql ="SELECT donor.donor_id, donor.donor_name, donor.donor_email, donor.donor_contNo, donor.donor_status, blood.blood_group, dept.dept_name, batch.batch_tag FROM donor,dept,batch,blood WHERE donor.blood_id=blood.blood_id AND donor.dept_id=dept.dept_id AND donor.batch_id=batch.batch_id AND donor.blood_id='$sgp' AND donor.donor_status='$sst' ORDER BY donor.donor_id DESC ";
+        }
+        elseif($sgp =='All' and $sdep !='All'){
+            $this -> sql ="SELECT donor.donor_id, donor.donor_name, donor.donor_email, donor.donor_contNo, donor.donor_status, blood.blood_group, dept.dept_name, batch.batch_tag FROM donor,dept,batch,blood WHERE donor.blood_id=blood.blood_id AND donor.dept_id=dept.dept_id AND donor.batch_id=batch.batch_id AND donor.dept_id='$sdep' AND donor.donor_status='$sst' ORDER BY donor.donor_id DESC ";
+        }else{
+            $this -> sql ="SELECT donor.donor_id, donor.donor_name, donor.donor_email, donor.donor_contNo, donor.donor_status, blood.blood_group, dept.dept_name, batch.batch_tag FROM donor,dept,batch,blood WHERE donor.blood_id=blood.blood_id AND donor.dept_id=dept.dept_id AND donor.batch_id=batch.batch_id AND donor.blood_id='$sgp' AND donor.dept_id='$sdep' AND donor.donor_status='$sst' ORDER BY donor.donor_id DESC ";
+        }
+        
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+        return $this -> res;
+        
+    }
+    
+    
 }
 ?>

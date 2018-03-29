@@ -37,7 +37,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="index.php">Home</a></li>
-            <li><a href="alldoner.php">All Doners List</a></li>
+            <li><a href="alldonor.php">All Doners List</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Blood <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
