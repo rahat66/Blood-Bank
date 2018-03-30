@@ -46,7 +46,7 @@ class Donor{
                 header('Location:donorprofile.php?d_id='.$id.'');
             }
             else{
-                return "not match";
+                return "ID or password not match";
             }
     }
     
@@ -92,6 +92,28 @@ class Donor{
         
         $this -> res = mysqli_query($this -> conn, $this -> sql);
         return $this -> res;
+    }
+    
+    function updateDonor($id, $dnam, $dcnt, $deml, $dst){
+        $this -> sql ="UPDATE `donor` SET `donor_name` = '$dnam', `donor_contNo` = '$dcnt', `donor_email` = '$deml', `donor_status` = '$dst' WHERE `donor`.`donor_id` = '$id' ;";
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+//            return $this -> res;
+            if($this -> res){
+                header('Location:donorprofile.php?d_id='.$id.'');
+            }else{
+                return "Failed!!";
+            }
+    }
+    
+    function updatePassword($id, $pass){
+        $this -> sql ="UPDATE `donor` SET `donor_pass` = '$pass' WHERE `donor`.`donor_id` = '$id' ;";
+                $this -> res = mysqli_query($this -> conn, $this -> sql);
+//            return $this -> res;
+            if($this -> res){
+                header('Location:donorprofile.php?d_id='.$id.'');
+            }else{
+                return "Failed!!";
+            }
     }
     
     

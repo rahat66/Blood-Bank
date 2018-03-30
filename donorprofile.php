@@ -2,11 +2,19 @@
 <?php
 include("Library/header.php");
 include_once('Classes/Donor.php');
- $donor = new Donor();
+include_once('Classes/DonateHistory.php');
+
+$dhist = new DonateHistory();
+$donor = new Donor();
+
+if(isset($_SESSION['donorId']))
+ $gid = $_SESSION['donorId'];
+
     if(isset($_GET['d_id'])){
         $did = $_GET['d_id'];
-        echo $did;
+//        echo $did;
         $getD = $donor -> getDonorById($did);
+        $gethist = $dhist -> getHistoryById($did);
     }
 ?> 
     
@@ -41,15 +49,15 @@ include_once('Classes/Donor.php');
                                     
                                     
                                     <tr>
-                                        <td><a href="#" class="text-info">View Profile</a></td>
+                                        <td><a href="donorprofile.php?d_id=<?php echo $gid;?>" class="text-info">View Profile</a></td>
                                     </tr>
                                     
                                      <tr>
-                                        <td><a href="#" class="text-info">Edit Profile</a></td>
+                                        <td><a href="editprofile.php?e_id=<?php echo $gid; ?>" class="text-info">Edit Profile</a></td>
                                     </tr>
                                     
                                     <tr>
-                                        <td><a href="#" class="text-info">Change Password</a></td>
+                                        <td><a href="changepassword.php?c_id=<?php echo $gid; ?>" class="text-info">Change Password</a></td>
                                     </tr>
                                      
                                     <tr>
@@ -57,15 +65,7 @@ include_once('Classes/Donor.php');
                                     </tr>
                                     
                                     <tr>
-                                        <td><a href="#" class="text-info">Add a Donation</a></td>
-                                    </tr>
-                                     
-                                    <tr>
-                                        <td><a href="#" class="text-info">Donation History</a></td>
-                                    </tr>
-                                     
-                                    <tr>
-                                        <td><a href="#" class="text-info">Privacy Options</a></td>
+                                        <td><a href="adddonation.php?a_id=<?php echo $gid; ?>" class="text-info">Add a Donation</a></td>
                                     </tr>
                                 </tbody>
     
@@ -147,19 +147,27 @@ include_once('Classes/Donor.php');
                                         <th>Donated To</th>
                                         <th>Address </th>
                                     </thead>
-                                    
+                                    <tbody>
+                                    <?php
+                                    if($gethist -> num_rows>0){
+                                        while($value = $gethist -> fetch_assoc()){
+
+                                    ?>
                                     <tr>
-                                        <td>2017-12-20</td>
-                                        <td>Direct to Patient</td>
-                                        <td>Prime Hospital</td>
+                                        <td><?php echo $value['d_date'];?></td>
+                                        <td><?php if($value['d_to'] == 0) echo "Blood Bank"; else echo "Direct To Patient";  ?></td>
+                                        <td><?php echo $value['d_address']; ?></td>
                                     </tr>
-                                    
-                                     <tr>
-                                        <td>2017-12-20</td>
-                                        <td>Direct to Patient</td>
-                                        <td>Prime Hospital</td>
+                                    <?php }}
+                                    else{
+//                                    echo "<tr colspan='3'><h4 style='color:red;'>SORRY! No Donation History Found.</h4></tr>";
+             
+                                    ?>
+                                    <tr>
+                                    <td colspan="3"><h4 style='color:red;'>SORRY! No Donation History Found.</h4></td>
                                     </tr>
-                                    
+                                    <?php }?>
+                                    </tbody>
                                 </table>
 
                             </div>

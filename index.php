@@ -41,18 +41,26 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                      <h3 class="panel-title">Donors Area</h3>
+                      <h3 class="panel-title">Donors Area<span style="color:yellow;">
+                          <?php
+                          if(isset($getLog)){
+                              echo $getLog;
+                          }
+                          ?>
+                          </span></h3>
                     </div>
                     
                     <div class="panel-body">
                         <?php
                         if(isset($_SESSION['donorId'])){
-                            echo "<a href='donorprofile.php' class = 'btn btn-primary' >Go to Profile</a>";
+                            $id = $_SESSION['donorId'];
+//                            echo $id;
+                            echo "<a href='donorprofile.php?d_id=$id' class = 'btn btn-primary' >Go to Profile</a>";
                         }else{
                     ?>
                         <form action="index.php" method="post">
-                            <input type="email" placeholder="Email" class="form-control input-sm" name="uemail" /><br/>
-                            <input type="password" placeholder="Password" class="form-control input-sm" name="upass" /><br/>
+                            <input type="email" placeholder="Email" class="form-control " name="uemail" /><br/>
+                            <input type="password" placeholder="Password" class="form-control " name="upass" /><br/>
                             <button class="btn btn-primary btn-sm" >Login</button>
                         </form>
                         <?php }?>
@@ -110,28 +118,28 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             <div class="panel-body">
                 <div class="row ">
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">A+<span class="badge"><?php echo $ap; ?></span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="alldonor.php?b_id=1">A+<span class="badge"><?php echo $ap; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">A-<span class="badge"><?php echo $an; ?></span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="alldonor.php?b_id=2">A-<span class="badge"><?php echo $an; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">B+<span class="badge"><?php echo $bp; ?></span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="alldonor.php?b_id=4">B+<span class="badge"><?php echo $bp; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">B-<span class="badge"><?php echo $bn; ?></span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="alldonor.php?b_id=5">B-<span class="badge"><?php echo $bn; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">O+<span class="badge"><?php echo $op; ?></span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="alldonor.php?b_id=6">O+<span class="badge"><?php echo $op; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">O-<span class="badge"><?php echo $on; ?></span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="alldonor.php?b_id=7">O-<span class="badge"><?php echo $on; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">AB+<span class="badge"><?php echo $abp; ?></span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="alldonor.php?b_id=8">AB+<span class="badge"><?php echo $abp; ?></span></a>
             </div>
             <div class="mgtop col-md-3">
-                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="#">AB-<span class="badge"><?php echo $abn; ?></span></a>
+                <a class="nav-pills active thumbnail  btn btn-primary btn-lg" href="alldonor.php?b_id=9">AB-<span class="badge"><?php echo $abn; ?></span></a>
             </div>
                 </div>
             </div>  

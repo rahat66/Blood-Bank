@@ -32,6 +32,16 @@ include_once('Classes/Blood.php');
         }
 
     }
+    if(isset($_GET['b_id'])){
+        $bid = $_GET['b_id'];
+        $dp  = 'All';
+        $st  = 1;
+         $getD = $donor -> getDonorByIndex($bid, $dp, $st); 
+        //    echo '<pre>';
+//            print_r($getD);
+//            echo '</pre>';
+            $au = $getD;
+    }
 ?>
     
     <div class="container">
