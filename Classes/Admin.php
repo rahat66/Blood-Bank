@@ -36,6 +36,18 @@ include_once($filepath.'/../Classes/Config.php');
             }
         }
         
+        
+        function changePassById($id, $pass){
+            $this -> sql = "UPDATE `admin` SET `pass` = '$pass' WHERE `admin`.`admin_id` = '$id' ;";
+            $this -> res = mysqli_query($this -> conn, $this -> sql);
+
+                if($this -> res){
+                    return "Success!!";
+                }else{
+                    return "Failed!!";
+                }
+        }
+        
 
         
     }

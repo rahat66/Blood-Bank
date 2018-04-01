@@ -139,6 +139,13 @@ class Donor{
         return $this -> res;
     }
     
+    function countDonor(){
+        $this -> sql = "SELECT COUNT(donor_id) AS totaldonor FROM donor;";
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+        $value = $this -> res -> fetch_assoc();
+        return $value['totaldonor'];
+    }
+    
     
 }
 ?>

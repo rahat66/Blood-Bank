@@ -70,5 +70,12 @@ class Department{
             }
            
         }
+    
+        function countDepartment(){
+        $this -> sql = "SELECT COUNT(dept_id) AS totaldept FROM dept;";
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+        $value = $this -> res -> fetch_assoc();
+        return $value['totaldept'];
+        }
 }
 ?>

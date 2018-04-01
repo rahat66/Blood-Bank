@@ -9,7 +9,7 @@ $gid;
 if(isset($_GET['c_id'])){
     $gid = $_GET['c_id'];
     
-    echo $gid;
+//    echo $gid;
     
 }
 

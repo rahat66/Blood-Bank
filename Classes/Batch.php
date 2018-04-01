@@ -71,5 +71,12 @@ class Batch{
             }
            
         }
+    
+        function countBatch(){
+        $this -> sql = "SELECT COUNT(batch_id) AS totalBatch FROM `batch`;";
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+        $value = $this -> res -> fetch_assoc();
+        return $value['totalBatch'];
+        }
 }
 ?>

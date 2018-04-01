@@ -46,5 +46,23 @@ class BloodRequest{
         $this -> res = mysqli_query($this -> conn, $this -> sql);
         return $this -> res; 
     }
+    
+    function countRequest(){
+        $this -> sql = "SELECT COUNT(req_id) AS totalReq FROM `blood_req`;";
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+        $value = $this -> res -> fetch_assoc();
+        return $value['totalReq'];
+        }
+    
+    function deletRequestById($id){
+        $this -> sql ="DELETE FROM `blood_bank`.`blood_req` WHERE `blood_req`.`req_id` = '$id';";
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+            
+            if($this -> res){
+                return "Success!!";
+            }else{
+                return "Failed!!";
+            }
+    }
 }
 ?>

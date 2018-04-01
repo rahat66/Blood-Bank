@@ -4,6 +4,10 @@ $filepath=realpath(dirname(__FILE__));
 include_once($filepath.'/../Classes/BloodRequest.php');
     
     $bloodreq = new BloodRequest();
+    if(isset($_GET['req_id'])){
+        $did = $_GET['req_id'];
+        $reqDelete = $bloodreq -> deletRequestById($did);
+    }
     $getReq = $bloodreq -> allRequest();
     $title  = "ALL";
     if(isset($_GET['req'])){
@@ -23,6 +27,16 @@ include_once($filepath.'/../Classes/BloodRequest.php');
 ?>
 <div class="container">
     <div class="row">
+        <?php 
+            if(isset($reqDelete)){
+                
+       
+        ?>
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <strong><?php echo $reqDelete; ?>!</strong>
+        </div>
+        <?php }?>
         <div class="table-responsive">
             <table class="table table-bordered table-condensed">
                 <thead>
@@ -61,9 +75,9 @@ include_once($filepath.'/../Classes/BloodRequest.php');
                         <td><?php echo $value['req_deadline']; ?></td>
                         <td><?php echo $value['req_name']; ?></td>
                         <td><?php echo $value['req_location']; ?></td>
-                        <td><?php echo $value['req_cnt']; ?></td>
+                        <td>0<?php echo $value['req_cnt']; ?></td>
                         <td><?php echo $value['req_message']; ?></td>
-                        <td><a href="#"><span title="remove" class="glyphicon glyphicon-remove"></span></a></td>
+                        <td><a href="?req_id=<?php echo $value['req_id']; ?>"><span title="remove" class="glyphicon glyphicon-remove"></span></a></td>
                     </tr>
                     <?php }}?>
                 </tbody>
