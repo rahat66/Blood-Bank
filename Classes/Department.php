@@ -1,6 +1,7 @@
 <?php
 $filepath=realpath(dirname(__FILE__));
 include_once($filepath.'/../Classes/Config.php');
+include_once($filepath.'/../Classes/Donor.php');
 ?>
 <?php
 class Department{
@@ -50,6 +51,24 @@ class Department{
             }else{
                 return "Failed!!";
             }
+        }
+    
+        function deleteById($id){
+            $donor = new Donor();
+            $dd    = $donor -> getDonorByDeptID($id);
+            if($dd -> num_rows > 0){
+                return "Failed! this department has donor";
+            }else{
+                $this -> sql ="DELETE FROM `dept` WHERE `dept`.`dept_id` = '$id'";
+                $this -> res = mysqli_query($this -> conn, $this -> sql);
+
+                if($this -> res){
+                    return "Success!!";
+                }else{
+                    return "Failed!!";
+                }
+            }
+           
         }
 }
 ?>

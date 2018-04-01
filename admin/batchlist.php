@@ -3,6 +3,14 @@ include('Library/header.php');
 $filepath=realpath(dirname(__FILE__));
 include_once($filepath.'/../Classes/Batch.php');
     $batch = new  Batch();
+
+
+    if(isset($_GET['dbtc_id'])){
+        $did = $_GET['dbtc_id'];
+//        echo $did;
+        $dd = $batch -> deleteById($did);
+    }
+
     $gb    = $batch -> getAllBatch();
 ?>
 <div class="container">
@@ -12,7 +20,13 @@ include_once($filepath.'/../Classes/Batch.php');
             <table class="table table-bordered table-striped table-hover">
                 <thead >
                     <tr>
-                        <th colspan="4">ALL BATCH</th>
+                        <th colspan="4">ALL BATCH  <span style="color:red;">
+                            <?php
+                                if(isset($dd)){
+                                    echo $dd;
+                                }
+                            ?>
+                            </span></th>
                     </tr>
                     <tr>
                         <th>Name</th>
@@ -29,7 +43,7 @@ include_once($filepath.'/../Classes/Batch.php');
                         <td><?php echo $value['batch_tag']; ?></td>
                         <td><?php echo $value['batch_session']; ?></td>
                         <td><a href="editbatch.php?btc_id=<?php echo $value['batch_id']; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
-                        <td><a href="? btc_id=<?php echo $value['batch_id']; ?>"><span class="glyphicon glyphicon-trash"></span></a></td>
+                        <td><a href="?dbtc_id=<?php echo $value['batch_id']; ?>"><span class="glyphicon glyphicon-trash"></span></a></td>
                     </tr>
                     <?php }}?>
                 </tbody>

@@ -116,6 +116,29 @@ class Donor{
             }
     }
     
+    function deleteDonorByID($id){
+        $this -> sql ="DELETE FROM `donor` WHERE `donor`.`donor_id` = '$id';";
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+//            return $this -> res;
+            if($this -> res){
+                return "Success!!";
+            }else{
+                return "Failed!!";
+            }
+    }
+    
+    function getDonorByBatchID($bid){
+        $this -> sql ="SELECT * FROM `donor` WHERE batch_id='$bid';";
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+        return $this -> res;
+    }
+    
+    function getDonorByDeptID($did){
+        $this -> sql ="SELECT * FROM `donor` WHERE dept_id='$did';";
+        $this -> res = mysqli_query($this -> conn, $this -> sql);
+        return $this -> res;
+    }
+    
     
 }
 ?>

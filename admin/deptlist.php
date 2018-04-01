@@ -3,6 +3,11 @@ include('Library/header.php');
 $filepath=realpath(dirname(__FILE__));
 include_once($filepath.'/../Classes/Department.php');
     $dept = new Department();
+    if(isset($_GET['dept_id'])){
+        $did = $_GET['dept_id'];
+//        echo $did;
+        $dd  = $dept -> deleteById($did);
+    }
     $getDept = $dept -> getAllDept();
 ?>
 <div class="container">
@@ -12,7 +17,13 @@ include_once($filepath.'/../Classes/Department.php');
             <table class="table table-bordered table-striped table-hover">
                 <thead >
                     <tr>
-                        <th colspan="4">DEPARTMET LIST</th>
+                        <th colspan="4">DEPARTMET LIST  <span style="color:red;">
+                            <?php
+                                if(isset($dd)){
+                                    echo $dd;
+                                }
+                            ?>
+                            </span></th>
                     </tr>
                     <tr>
                         <th>Name</th>

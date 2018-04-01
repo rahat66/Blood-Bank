@@ -1,6 +1,7 @@
 <?php
 $filepath=realpath(dirname(__FILE__));
 include_once($filepath.'/../Classes/Config.php');
+include_once($filepath.'/../Classes/Donor.php');
 ?>
 <?php
 class Batch{
@@ -51,6 +52,24 @@ class Batch{
             }else{
                 return "Failed!!";
             }
+        }
+    
+        function deleteById($id){
+            $donor = new Donor();
+            $dd    = $donor -> getDonorByBatchID($id);
+            if($dd -> num_rows > 0){
+                return "Failed! this batch has donor";
+            }else{
+                $this -> sql ="DELETE FROM `batch` WHERE `batch`.`batch_id` = '$id'";
+                $this -> res = mysqli_query($this -> conn, $this -> sql);
+
+                if($this -> res){
+                    return "Success!!";
+                }else{
+                    return "Failed!!";
+                }
+            }
+           
         }
 }
 ?>

@@ -8,6 +8,12 @@ include_once($filepath.'/../Classes/Donor.php');
     $donor = new Donor();
     $dept  = new Department();
     $blood = new Blood();
+    
+    if(isset($_GET['d_id'])){
+        $id = $_GET['d_id'];
+//        echo $id;
+        $dd = $donor -> deleteDonorByID($id);
+    }
 
     $getDept  = $dept -> getAllDept();
     $getBldGp = $blood -> getAllBloodGroup();
@@ -38,7 +44,13 @@ include_once($filepath.'/../Classes/Donor.php');
         <div class="row mgUpper ">
                 <div class="panel panel-default ">
                 <div class="panel-heading">
-                    <h3 class="panel-title">ALL DONERS</h3>
+                    <h3 class="panel-title">ALL DONERS  <span style="color:red;">
+                            <?php
+                                if(isset($dd)){
+                                    echo $dd;
+                                }
+                            ?>
+                            </span></h3>
                 </div>
                 <div class="panel-body">
                 <div class="table-responsive">
