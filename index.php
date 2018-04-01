@@ -1,7 +1,10 @@
 <?php 
 include("Library/header.php");
 include_once('Classes/Donor.php');
+include_once('Classes/BloodRequest.php');
 $donor = new Donor();
+$bloodreq = new BloodRequest();
+$getreq   = $bloodreq -> currentRequest();
 $ap  = $donor -> donorByGroup('A+');
 $an  = $donor -> donorByGroup('A-');
 $bp  = $donor -> donorByGroup('B+');
@@ -214,25 +217,20 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     <h3 class="panel-title">Current Request for Blood</h3>
                 </div>
                 <div class="panel-body">
+                    <?php
+                    if(isset($getreq)){
+                        while($value = $getreq -> fetch_assoc()){
+                            
+                    ?>
                 <div class="thumbnail col-md-6  col-sm-12 col-xs-12 ">
-                  <h5><strong>Blood Group: </strong>AB negative(-)</h5>
-                  <h5><strong>Amount: </strong>2 Unit(s)/Bag(s) </h5>
-                  <h5><strong>Donation Date: </strong>28/01/2018</h5>
-                  <h5><strong>Patient's Location: </strong> Dhaka</h5>
-                  <h5><strong>Patient's Location: </strong>Dhaka</h5>
-                  <h5><strong>District: </strong>Dhaka</h5>
-                  <h5><strong>Contact Number: </strong>01794177037</h5>
+                  <h5><strong>Blood Group : </strong><?php echo $value['blood_group']; ?></h5>
+                  <h5><strong>Amount : </strong><?php echo $value['req_amount']; ?> Unit(s)/Bag(s) </h5>
+                  <h5><strong>Donation Date : </strong><?php echo $value['req_deadline']; ?></h5>
+                  <h5><strong>Patient's Location : </strong><?php echo $value['req_location']; ?></h5>
+                  <h5><strong>Contact Number: </strong><?php echo $value['req_cnt']; ?></h5>
+                  <h5><strong>More Message : </strong><?php echo $value['req_message']; ?></h5>
                 </div>
-              
-                <div class="thumbnail col-md-6 col-sm-12 col-xs-12 ">
-                  <h5><strong>Blood Group: </strong>AB negative(-)</h5>
-                  <h5><strong>Amount: </strong>2 Unit(s)/Bag(s) </h5>
-                  <h5><strong>Donation Date: </strong>28/01/2018</h5>
-                  <h5><strong>Patient's Location: </strong>Dhaka</h5>
-                  <h5><strong>Patient's Location: </strong> Dhaka</h5>
-                  <h5><strong>District: </strong>Dhaka</h5>
-                  <h5><strong>Contact Number: </strong>01794177037</h5>
-                  </div>
+              <?php }}?>
                 </div>  
                 
             </div>       
