@@ -48,7 +48,7 @@ include_once('Classes/Blood.php');
         <div class="row mgUpper ">
                 <div class="panel panel-primary ">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Member Registration</h3>
+                    <h3 class="panel-title">ALL DONERS</h3>
                 </div>
                 <div class="panel-body">
                 <div class="table-responsive">

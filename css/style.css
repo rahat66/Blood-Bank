@@ -62,14 +62,14 @@ body{
 
 .panel-primary {
     
-	border-color:  #FE3C47;
+	border-color:  #eee;
 }
 
 .panel-primary > .panel-heading {
     
 	color: #fff;
 	background-color: #FE3C47;
-	border-color: #FE3C47;
+	border-color: #eee;
 }
 
 .heading{

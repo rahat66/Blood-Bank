@@ -74,8 +74,8 @@ if(isset($_SESSION['donorId']))
                             else{
                             ?>
                             <form action="index.php" method="post">
-                            <input type="email" placeholder="Email" class="form-control input-sm" name="uemail" /><br/>
-                            <input type="password" placeholder="Password" class="form-control input-sm" name="upass" /><br/>
+                            <input type="email" placeholder="Email" class="form-control " name="uemail" /><br/>
+                            <input type="password" placeholder="Password" class="form-control " name="upass" /><br/>
                             <button class="btn btn-primary btn-sm" >Login</button>
                             </form>
                             <?php }?>

@@ -19,10 +19,38 @@ class Batch{
         }
     
     
+        function insertBatch($nm, $des){
+            $this -> sql = "INSERT INTO `batch` (`batch_id`, `batch_tag`, `batch_session`) VALUES (NULL, '$nm', '$des')";
+            $this -> res = mysqli_query($this -> conn, $this -> sql);
+            
+            if($this -> res){
+                return "Success!!";
+            }else{
+                return "Failed!!";
+            }
+        }
+    
         function getAllBatch(){
             $this -> sql = "SELECT * FROM `batch` ;";
             $this -> res = mysqli_query($this -> conn, $this -> sql);
             return $this -> res;
+        }
+    
+        function getBatchById($bid){
+            $this -> sql = "SELECT * FROM `batch` WHERE batch_id = '$bid';";
+            $this -> res = mysqli_query($this -> conn, $this -> sql);
+            return $this -> res;
+        }
+    
+        function updateBatch($id, $name, $des){
+            $this -> sql = "UPDATE `batch` SET `batch_tag` = '$name', `batch_session` = '$des' WHERE `batch`.`batch_id` = '$id' ;";
+            $this -> res = mysqli_query($this -> conn, $this -> sql);
+            
+            if($this -> res){
+                header('Location:batchlist.php');
+            }else{
+                return "Failed!!";
+            }
         }
 }
 ?>

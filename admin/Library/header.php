@@ -1,4 +1,5 @@
 <?php
+$filepath=realpath(dirname(__FILE__));
     session_start();
     $adId = $_SESSION['adminId'];
     if(!$adId){
@@ -69,6 +70,7 @@
           
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a target="_blank" href="../index.php">Visit Site</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"><?php echo $_SESSION['adminName'];?></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -80,7 +82,7 @@
                     header('Location:login.php');
                 }  
             ?>
-            <li><a href="? action=logout"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+            <li><a href="? action=logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           </ul>
         </li>
       </ul>
