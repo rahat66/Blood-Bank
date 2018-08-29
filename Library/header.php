@@ -43,13 +43,14 @@ session_start();
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Blood <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Why donate Blood</a></li>
-                <li><a href="#">Eligibility to Donate Blood</a></li>
-                <li><a href="#">Tips for Success Donation</a></li>
+                <li><a href="benefitofdonation.php">Why donate Blood</a></li>
+                <li><a href="eligibilityofdonation.php">Eligibility to Donate Blood</a></li>
+                <li><a href="responsibility.php">Tips for Success Donation</a></li>
 
               </ul>
             </li>
             <li><a href="bloodrequest.php">Request for Blood</a></li>
+            <li><a href="aboutus.php">About NSTUBDS</a></li>
 
           </ul>
         </div><!--/.nav-collapse -->

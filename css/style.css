@@ -6,6 +6,30 @@ body{
 
 }
 
+.Heading {
+    color: #fff;
+    background-color: #FE3C47;
+    border-color: #FE3C47;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 35px;
+	font-family: comic sans ms;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.contentstyle{
+    text-align: justify;
+    font-family: comic sans ms;
+    margin-top: 20px;
+}
+
+.contentstyle ul li{
+    list-style-type: circle;
+    margin-top: 20px;
+}
+
+
 .brandimg{
     
   height: 30px;

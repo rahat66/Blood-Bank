@@ -18,6 +18,10 @@ class BloodRequest{
             $this -> conn = mysqli_connect($this -> uhost, $this -> uuser, $this -> upass, $this -> udb);
         }
     function insertBloodReq($bid, $rname, $rcnt, $ram, $rloc, $rdl, $rms){
+        
+        $rloc = mysqli_real_escape_string($this -> conn, $rloc) ;
+        $rms  = mysqli_real_escape_string($this -> conn, $rms) ;
+        
         $this -> sql = "INSERT INTO `blood_req` (`req_id`, `blood_id`, `req_name`, `req_cnt`, `req_amount`, `req_location`, `req_deadline`, `req_message`, `cur_date`) VALUES (NULL, '$bid', '$rname', '$rcnt', '$ram', '$rloc', '$rdl', '$rms', CURRENT_DATE());";
         
         $this -> res = mysqli_query($this -> conn, $this -> sql);

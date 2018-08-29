@@ -21,8 +21,9 @@ include_once('Classes/Donor.php');
         $d_dept  = $_POST['user_dept'];
         $d_batch = $_POST['user_batch'];
         $b_bldgp = $_POST['user_bgp'];
+        $d_add   = $_POST['user_add'];
         
-        $insertDonor = $donor -> createDonor($b_bldgp, $d_dept, $d_batch, $d_name, $d_cont, $d_email, $d_pass);
+        $insertDonor = $donor -> createDonor($b_bldgp, $d_dept, $d_batch, $d_name, $d_cont, $d_email, $d_pass, $d_add);
     }
 
    
@@ -94,6 +95,11 @@ include_once('Classes/Donor.php');
                             <option value="<?php echo $value['batch_id']; ?>"><?php echo $value['batch_tag']; ?></option>
                             <?php }}?>
                         </select>
+                    </div>
+                        
+                    <div class="form-group">
+                      <label for="usr">Address</label>
+                      <input type="text" class="form-control" id="usr" name="user_add" required>
                     </div>
                     
                      <div class="form-group">

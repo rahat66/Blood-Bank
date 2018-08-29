@@ -16,9 +16,11 @@ $donor = new Donor();
         $ecnt = $_POST['user_cont'];
         $eml  = $_POST['user_email'];
         $est  = $_POST['st'];
+        $uadd = $_POST['user_add'];
         $uid  = $_SESSION['donorId'];
+        
 //        echo $uid;
-        $ud   = $donor -> updateDonor($uid, $enm, $ecnt, $eml, $est);
+        $ud   = $donor -> updateDonor($uid, $enm, $ecnt, $eml, $est, $uadd);
     }
 
 ?>
@@ -51,6 +53,11 @@ $donor = new Donor();
                               <label for="emal">Email (will be login ID)</label>
                               <input type="email" value="<?php echo $value['donor_email'] ?>" class="form-control" id="emal" name="user_email" required>
                             </div> 
+                            
+                            <div class="form-group">
+                              <label for="usr_add">Address</label>
+                              <input value="<?php echo $value['donor_address'] ?>" type="text" class="form-control" id="usr_add" name="user_add" required>
+                            </div>
                             
                             <div class="form-group">
                                 <label for="sel1_stats">Status</label>

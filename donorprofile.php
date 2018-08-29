@@ -13,8 +13,9 @@ if(isset($_SESSION['donorId']))
     if(isset($_GET['d_id'])){
         $did = $_GET['d_id'];
 //        echo $did;
-        $getD = $donor -> getDonorById($did);
-        $gethist = $dhist -> getHistoryById($did);
+        $getD       = $donor -> getDonorById($did);
+        $gethist    = $dhist -> getHistoryById($did);
+        $getDatedif = $dhist -> getDateDiff($did);
     }
 ?> 
     
@@ -118,7 +119,15 @@ if(isset($_SESSION['donorId']))
                                     
                                     <tr>
                                         <td>Member Status</td>
-                                        <td><?php if($value['donor_status'] == 0) echo "Inactive"; else echo "Active"; ?></td>
+                                        <td><?php if(isset($getDatedif)){
+                                        if($getDatedif>0){
+                                            echo '<p style="color:red;"><strong style="color:#4D4D4D;">'.$getDatedif.'</strong> Days left to ready for next donation</p>';
+                                        }else{
+                                        if($value['donor_status'] == 0) echo "Inactive"; else echo "Active";
+                                    }
+                                    }else{
+                                        if($value['donor_status'] == 0) echo "Inactive"; else echo "Active";
+                                    } ?></td>
                                     </tr>
                                     
                                     <tr>
@@ -133,6 +142,10 @@ if(isset($_SESSION['donorId']))
                                     <tr>
                                         <td>Batch</td>
                                         <td><?php echo $value['batch_tag']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td><?php echo $value['donor_address']; ?></td>
                                     </tr>
                                     <?php }}?>
                                 </tbody>

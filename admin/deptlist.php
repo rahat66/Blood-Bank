@@ -2,6 +2,7 @@
 include('Library/header.php');
 $filepath=realpath(dirname(__FILE__));
 include_once($filepath.'/../Classes/Department.php');
+
     $dept = new Department();
     if(isset($_GET['dept_id'])){
         $did = $_GET['dept_id'];

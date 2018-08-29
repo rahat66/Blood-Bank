@@ -37,5 +37,12 @@ class DonateHistory{
             $this -> res = mysqli_query($this -> conn, $this -> sql);
             return $this -> res;
         }
+    
+        function getDateDiff($id){
+            $this -> sql ="SELECT 120-DATEDIFF(CURDATE(), d_date) AS 'datedif' FROM d_hist WHERE donor_id = '$id' ORDER BY d_date DESC LIMIT 1 ;";
+            $this -> res = mysqli_query($this -> conn, $this -> sql);
+            $tmp = $this -> res -> fetch_assoc();
+            return $tmp['datedif'];
+        }
 }
 ?>

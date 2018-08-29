@@ -20,8 +20,12 @@ class Donor{
             $this -> conn = mysqli_connect($this -> uhost, $this -> uuser, $this -> upass, $this -> udb);
     }
     
-    function createDonor($ubg, $udept, $ubtch, $uname, $ucont, $ueml, $upass){
-        $this -> sql = "INSERT INTO `donor` (`donor_id`, `blood_id`, `dept_id`, `batch_id`, `donor_name`, `donor_contNo`, `donor_email`, `donor_pass`, `donor_status`, `donor_joinDate`) VALUES (NULL, '$ubg', '$udept', '$ubtch', '$uname', '$ucont', '$ueml', '$upass', '1', CURRENT_DATE());";
+    function createDonor($ubg, $udept, $ubtch, $uname, $ucont, $ueml, $upass, $uadd){
+        
+        $uname = mysqli_real_escape_string($this -> conn, $uname) ;
+        $uadd  = mysqli_real_escape_string($this -> conn, $uadd) ;
+        
+        $this -> sql = "INSERT INTO `donor` (`donor_id`, `blood_id`, `dept_id`, `batch_id`, `donor_name`, `donor_contNo`, `donor_email`, `donor_pass`, `donor_status`, `donor_address`, `donor_joinDate`) VALUES (NULL, '$ubg', '$udept', '$ubtch', '$uname', '$ucont', '$ueml', '$upass', '1', '$uadd', CURRENT_DATE());";
         
         $this -> res = mysqli_query($this -> conn, $this -> sql);
 //            return $this -> res;
@@ -88,14 +92,14 @@ class Donor{
     }
     
     function getDonorById($id){
-        $this -> sql = "SELECT donor.donor_id, donor.donor_name, donor.donor_email, donor.donor_contNo, donor.donor_status, blood.blood_group, dept.dept_name, batch.batch_tag FROM donor,dept,batch,blood WHERE donor.blood_id=blood.blood_id AND donor.dept_id=dept.dept_id AND donor.batch_id=batch.batch_id AND donor.donor_id ='$id';";
+        $this -> sql = "SELECT donor.donor_id, donor.donor_name, donor.donor_email, donor.donor_contNo, donor.donor_status, blood.blood_group, dept.dept_name, batch.batch_tag,donor.donor_address FROM donor,dept,batch,blood WHERE donor.blood_id=blood.blood_id AND donor.dept_id=dept.dept_id AND donor.batch_id=batch.batch_id AND donor.donor_id ='$id';";
         
         $this -> res = mysqli_query($this -> conn, $this -> sql);
         return $this -> res;
     }
     
-    function updateDonor($id, $dnam, $dcnt, $deml, $dst){
-        $this -> sql ="UPDATE `donor` SET `donor_name` = '$dnam', `donor_contNo` = '$dcnt', `donor_email` = '$deml', `donor_status` = '$dst' WHERE `donor`.`donor_id` = '$id' ;";
+    function updateDonor($id, $dnam, $dcnt, $deml, $dst, $dadd){
+        $this -> sql ="UPDATE `donor` SET `donor_name` = '$dnam', `donor_contNo` = '$dcnt', `donor_email` = '$deml', `donor_status` = '$dst', `donor_address` = '$dadd'  WHERE `donor`.`donor_id` = '$id' ;";
         $this -> res = mysqli_query($this -> conn, $this -> sql);
 //            return $this -> res;
             if($this -> res){
